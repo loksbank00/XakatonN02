@@ -27,12 +27,13 @@
       </div>
       <div class="skrol">
 
-    {% for post in posts %}
+     {% for post in posts %}
     <div class="albums">
-
+      {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
       <img src="{{ post.url }}" class="img"/>
-
-
+      {% elif post.ext == ".mp4" %}
+      <video src="{{ post.url }}" controls></video>
+      {% endif %}
     </div>
     {% else %}
     <p class="no_work">

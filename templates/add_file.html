@@ -13,28 +13,59 @@
 
     <div class="main">
       <form method="post" class="main" enctype="multipart/form-data">
-      <div class="form_add_file">
+        <div class="form_add_file">
+          <div class="one">
         <div class="hi">
-          <h1>Добавте файл</h1>
+          <h1 class="titleaddf">Добавьте файл</h1>
         </div>
 
         <label for="images" class="drop-container" id="dropcontainer">
-        <span class="drop-title">Переташите файл сюда</span>
-        или
-        <input type="file" name="add_f" id="images" accept="image/*" required >
 
-          <img id="image" height="100px" width="100px"/>
+        <span class="drop-title">Перетащите файл сюда </span>
+        или
+       <input type="file" name="add_f" id="images" accept="image/*, video/*"  required>
+
         </label>
+
         <input id="submit_add_file" type="submit" value="Загрузить" />
       </div>
+          <div class="imgprev">
+            <img id="image" height="50%" style="max-width: 15vw"/>
+            <video id="video" height="50%" style="max-width: 15vw; position: relative; top: -50%"   ></video>
+          </div>
+        </div>
       </form>
     </div>
   <script>
+  var flag =0;
   var f = document.getElementById('images');
     f.addEventListener("change", aaaa);
     function aaaa(e) {
-   var src = URL.createObjectURL(this.files[0]);
-  document.getElementById('image').src = src
+    if (flag!=0){
+      document.getElementById('image').src='';
+      document.getElementById('video').src = '';
+      document.getElementById('video').controls = '';
+
+    }
+    var src = URL.createObjectURL(this.files[0]);
+    if (this.files[0].type.includes('image')){
+      flag=1;
+      document.getElementById('image').src = src;}
+    else if (this.files[0].type.includes('video')){
+      flag=1;
+      document.getElementById('video').src = src;
+      document.getElementById('video').controls = 'controls';
+      }
+
+    document.getElementById('submit_add_file').style.transform = 'translate(320%,0%)';
+    document.getElementsByClassName("imgprev")[0].style.setProperty('width', '17vw');
+
+    document.getElementsByClassName("titleaddf")[0].style.transform = 'translate(8.5vw,0%)';
+
+
+
+
+
 };
   </script>
   </body>

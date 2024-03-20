@@ -41,6 +41,7 @@ class Users(db.Model, UserMixin):
 class Content(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(400))
+    ext = db.Column(db.String(5))
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     album = db.Column(db.Integer, db.ForeignKey("albums.id"))
     location = db.Column(db.String(50))
@@ -71,6 +72,7 @@ def general():
 
 @app.route("/profile")
 def profile():
+
     posts = Content.query.filter_by(author_id=current_user.id)
     return render_template('profile.html', posts=posts)
 
@@ -148,14 +150,16 @@ def log():
 @app.route("/af",  methods=['GET','POST'])
 def add_file():
 
-
+    ras='jkl'
     if request.method == 'POST':
         # filename = request.form.get('add_f')
         file = request.files['add_f']
         filename = secure_filename(file.filename)
-        pathfile = 'static/img/'+filename
+        ras1, ras = os.path.splitext(filename)
+        print(ras)
+        pathfile = UPLOAD_FOLDER+filename
         print(pathfile)
-        content = Content(url=pathfile, author_id = current_user.id, album=1, location="", date=datetime.date.today(), device="efe")
+        content = Content(url=pathfile, ext=ras, author_id = current_user.id, album=1, location="", date=datetime.date.today(), device="efe")
         db.session.add(content)
         db.session.commit()
         print(file)
@@ -172,6 +176,7 @@ def red01():
 def create_albums():
     posts = Content.query.all()
     return render_template('create_albums.html', posts=posts)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
