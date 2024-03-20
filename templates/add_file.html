@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Форма регистрации</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <script src="{{url_for('static', filename='js/script1.js')}}"></script>
+  </head>
+  <body>
+    <div class="name">
+
+    </div>
+
+    <div class="main">
+      <form method="post" class="main" enctype="multipart/form-data">
+      <div class="form_add_file">
+        <div class="hi">
+          <h1>Добавте файл</h1>
+        </div>
+
+        <label for="images" class="drop-container" id="dropcontainer">
+        <span class="drop-title">Переташите файл сюда</span>
+        или
+        <input type="file" name="add_f" id="images" accept="image/*" required >
+
+          <img id="image" height="100px" width="100px"/>
+        </label>
+        <input id="submit_add_file" type="submit" value="Загрузить" />
+      </div>
+      </form>
+    </div>
+  <script>
+  var f = document.getElementById('images');
+    f.addEventListener("change", aaaa);
+    function aaaa(e) {
+   var src = URL.createObjectURL(this.files[0]);
+  document.getElementById('image').src = src
+};
+  </script>
+  </body>
+</html>

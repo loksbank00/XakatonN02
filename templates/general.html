@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>1.2</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+  </head>
+  <body>
+    <div class="top">
+      <div class="logo">
+
+      </div>
+      <div class="search_area">
+        <input class="search" type="text" name="" value="">
+        <button class="search_button" type="button" name="button"><h5>Поиск</h5></button>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="buttons">
+
+          <a class='button_a' href="/profile"><div class="button_login"><h4>Профиль</h4></div></a>
+
+      </div>
+      {% else %}
+      <div class="buttons">
+
+          <a class='button_a' href="/log"><div class="button_login"><h4>Вход</h4></div></a>
+
+      </div>
+      {% endif %}
+    </div>
+    <div class="under_index">
+
+      <div class="skrol_index">
+        {% for post in posts %}
+          <div class="albums">
+
+            <img src="{{ post.url }}" class="img"/>
+
+          </div>
+    {% else %}
+    <p class="no_work">
+      Пока нет работ выбранного года
+    </p>
+
+    {% endfor %}
+      </div>
+    </div>
+
+  </body>
+</html>
