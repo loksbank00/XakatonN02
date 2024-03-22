@@ -555,3 +555,41 @@ input[type="checkbox"]:checked:after {
   background-color: #93D6DF;
 }
 
+input[type="checkbox"] {
+ -webkit-appearance: none;
+ position: relative;
+ width: 100%;
+ cursor: pointer;
+}
+.left{
+flex-direction: column;
+justify-content: space-between;
+}
+.info{
+height: 60%;
+width: 100%
+flex-direction: column;
+justify-content: center;
+flex-direction:space-between;
+margin-left: 72px;
+margin-top: 15%;
+}
+.popka{
+height: 20%;
+width: 100%;
+display: flex;
+margin-left: 15%;
+margin-right: 15%;
+}
+.access{
+height:80%;
+}
+.savealbom{
+display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+}
+.name_album{
+width: 100%;
+}

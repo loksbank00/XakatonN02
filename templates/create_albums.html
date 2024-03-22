@@ -13,24 +13,34 @@
    <div class="main">
        <div class="form_album">
            <div class="left">
-               <input type="text" class="name_album">
-               <input type="text" class="name_album">
-               <input type="text" class="name_album">
-
+                <div class="info">
+                   <input type="text" class="name_album" placeholder="Название альбома" pattern="GGGg">
+                   <input type="text" class="soavtor" placeholder="Соавторы">
+                   <input type="text" class="teg" placeholder="Хештег">
+                   <input type="text" class="description" placeholder="Описание">
+                </div>
+            <div class="popka">
                <input type="hidden" name="category" value="0">
-                <input class="access" id="astra" type="button" name="but1" value="0" onclick='changeColor()'>
+                <input class="access" id="astra" type="button" name="but1" value="Закрытый альбом" onclick='changeColor()'>
 
-               <input class="access" id="cat" type="button" name="but" value="1" onclick='changeColor()'>
+               <input class="access" id="cat" type="button" name="but" value="Открытый альбом" onclick='changeColor()'>
 
+            </div>
+               <div class="savealbom">
+                         <input class="save" id="astra" type="button" name="but1" value="Сохранить альбом" onclick='changeColor()'>
+               </div>
            </div>
            <div class="right">
                      <div class="skrol_in_form">
 
                         {% for post in posts %}
                             <div class="albums">
+                                <input type="checkbox" id="dessert-1"/>
+                                <label for="dessert-1"></label>
+                                 <img src="{{ post.url }}" class="img"/>
+                                <div class="galka">
 
-                                <img src="{{ post.url }}" class="img"/>
-
+                                </div>
 
                             </div>
                         {% else %}

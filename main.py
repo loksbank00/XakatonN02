@@ -41,7 +41,6 @@ class Users(db.Model, UserMixin):
 class Content(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(400))
-    ext = db.Column(db.String(5))
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     album = db.Column(db.Integer, db.ForeignKey("albums.id"))
     location = db.Column(db.String(50))
