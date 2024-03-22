@@ -8,48 +8,67 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-  </head>
+   </head>
   <body>
-   <div class="main">
-       <div class="form_album">
-           <div class="left">
-                <div class="info">
-                   <input type="text" class="name_album" placeholder="Название альбома" pattern="GGGg">
-                   <input type="text" class="soavtor" placeholder="Соавторы">
-                   <input type="text" class="teg" placeholder="Хештег">
-                   <input type="text" class="description" placeholder="Описание">
-                </div>
-            <div class="popka">
-               <input type="hidden" name="category" value="0">
-                <input class="access" id="astra" type="button" name="but1" value="Закрытый альбом" onclick='changeColor()'>
+    <div class="main">
+        <div class="form_album">
+            <div class="left">
+                <form method="post" style="height: 100%">
+                    <div class="da">
 
-               <input class="access" id="cat" type="button" name="but" value="Открытый альбом" onclick='changeColor()'>
+                        <textarea name="authors" class="input_album" id="authors"></textarea>
+                        <textarea name="name" class="input_album" id="name"></textarea>
+                        <textarea name="tegs" class="input_album" id="tegs"></textarea>
+                        <textarea name="description" class="input_album" id="description"></textarea>
+                    </div>
+                    <div class="access_b">
+                        <input type="hidden" name="access" value="0">
+                        <input class="access" id="cat0" type="button" name="but1" value="0" onclick='changeColor()'>
+                        <input class="access" id="cat1" type="button" name="but" value="1" onclick='changeColor()'>
+                    </div>
 
-            </div>
-               <div class="savealbom">
-                         <input class="save" id="astra" type="button" name="but1" value="Сохранить альбом" onclick='changeColor()'>
-               </div>
+                    <div class="divcreatedalbum">
+                        <input type="submit" value="Создать" id="created_a">
+                    </div>
+                    <input type="hidden" name="photo_list" value="">
+                </form>
            </div>
            <div class="right">
                      <div class="skrol_in_form">
 
                         {% for post in posts %}
-                            <div class="albums">
-                                <input type="checkbox" id="dessert-1"/>
-                                <label for="dessert-1"></label>
+
+                         {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
+
+
+                         <div class="albums">
+                                <input type="checkbox" id="{{ post.id }}" value="{{ post.id }}"/>
+                                <label for="{{ post.id }}"></label>
                                  <img src="{{ post.url }}" class="img"/>
                                 <div class="galka">
 
                                 </div>
-
                             </div>
+                            {% elif post.ext == ".mp4" %}
+
+
+                         <div class="albums">
+                                <input type="checkbox" name="photo" id="{{ post.id }}" value="{{ post.id }}"/>
+                                <label for="{{ post.id }}"></label>
+                                 <video class="img" src="{{ post.url }}" controls></video>
+                                <div class="galka">
+
+                                </div>
+                            </div>
+
+                            {% endif %}
                         {% else %}
                             <p class="no_work">
                                 Пока нет работ выбранного года
                             </p>
 
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
+                </div>
 
            </div>
 
@@ -57,6 +76,27 @@
 
    </div>
   <script src="../static/js/script1.js">
+
+    </script>
+    <script>
+
+        var list_photo_alb = document.querySelectorAll('input[type=checkbox]')
+        var inp_hid = document.getElementsByName('photo_list')
+        function choise_photo(e){
+            if (this.checked) {
+                inp_hid[0].value += this.value+' '
+                console.log(inp_hid[0])
+            } else {
+                inp_hid[0].value = inp_hid[0].value.replace(String(this.value)+' ','')
+                console.log(inp_hid[0])
+            }
+        }
+        for (var index = 0; index < list_photo_alb.length; index++) {
+            list_photo_alb[index].addEventListener("change", choise_photo)
+            }
+
+
+
 
     </script>
   </body>

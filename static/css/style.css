@@ -118,7 +118,8 @@ a::visited {
   background: #93D6DF;
   display: flex;
   justify-content: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-direction: column;
   position: fixed;
   top:0px;
   left:0px;
@@ -559,7 +560,6 @@ input[type="checkbox"]:checked:after {
   height: auto;
   margin-top: 3%;
   margin-bottom: 3%;
-
   padding: 3%;
   columns: 4;
   column-gap: 40px;
@@ -579,34 +579,66 @@ input[type="checkbox"] {
  cursor: pointer;
 }
 .left{
-flex-direction: column;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }
-.info{
-height: 60%;
-width: 100%
-flex-direction: column;
-justify-content: center;
-flex-direction:space-between;
-margin-left: 72px;
-margin-top: 15%;
+.da{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 70%;
 }
-.popka{
-height: 20%;
-width: 100%;
-display: flex;
-margin-left: 15%;
-margin-right: 15%;
+.input_album{
+  width: 90%;
+  resize: none;
+  font-size: 19PX;
+
+}
+#authors{
+width: 85%;
+margin-top: 5%;
+}
+#name{
+width: 85%;
+margin-top: 5%;}
+#tegs{
+width: 85%;
+height: 35%;
+margin-top: 5%;
+}
+#description{
+  height: 35%;
+  width: 85%;
+  margin-top: 5%;
+}
+.access_b{
+    display: flex;
+
+    justify-content: space-around;
+    height: 10%;
 }
 .access{
-height:80%;
+  height: 60%;
+  width: 40%;
+    margin-top: 5%;
+  border: 0px solid #DBE7F6;
+
 }
-.savealbom{
-display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 20%;
+.divcreatedalbum{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
 }
-.name_album{
-width: 100%;
+input#created_a:hover{
+    background: #DBE7F6;
+}
+.ierarh{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 15%;
+    border: 2px solid #DBE7F6;
+    font-size: 20px;
 }

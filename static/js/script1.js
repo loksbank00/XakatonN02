@@ -117,5 +117,20 @@ saveImgBtn.addEventListener("click", saveImage);
 fileInput.addEventListener("change", loadImage);
 chooseImgBtn.addEventListener("click", () => fileInput.click());
 
-
+function changeColor(e) {
+      var submits = document.getElementsByName("access");
+      console.log(submits['0']);
+      var sender = (e && e.target) || (window.event && window.event.srcElement);
+      if (sender.name == 'but1'){
+        submits[0].value='0';
+        document.getElementById('cat0').style.backgroundColor = '#DBE7F6';
+        document.getElementById('cat1').style.backgroundColor = '';
+        console.log(submits['0']);
+      }
+      else if(sender.name == 'but'){
+      submits[0].value='1';
+      document.getElementById('cat1').style.backgroundColor = '#DBE7F6';
+      document.getElementById('cat0').style.backgroundColor = '';
+      }
+}
 

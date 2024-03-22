@@ -43,7 +43,7 @@ class Content(db.Model):
     url = db.Column(db.String(400))
     ext = db.Column(db.String(5))
     author_id = db.Column(db.ForeignKey("users.id"))
-    album = db.Column( db.ForeignKey("albums.id"))
+    album = db.Column(db.ForeignKey("albums.id"))
     location = db.Column(db.String(50))
     date = db.Column(db.Date)
     device = db.Column(db.String(50))
@@ -75,8 +75,9 @@ def general():
 
 @app.route("/profile")
 def profile():
+    alb = Albums.query.filter_by(authors=current_user.id)
     posts = Content.query.filter_by(author_id=current_user.id)
-    return render_template('profile.html', posts=posts)
+    return render_template('profile.html', posts=posts, alb=alb)
 
 @app.route("/out_akk")
 def logout():
@@ -183,6 +184,7 @@ def create_albums():
 
     if request.method == 'POST':
         print("sdfgkj")
+
         authors = request.form.get('authors')
         photos = request.form.get('photo_list').split(' ')
         for i in range(len(photos)):
@@ -199,14 +201,14 @@ def create_albums():
         print(type(access))
         print(current_user)
         contentinalbum =1
-        albm = Albums(name=name, tegs=tegs, authors=current_user.id, description=description, date=datetime.date.today(), data_add_alb=datetime.date.today(),  access=access)
+        albm = Albums(name=name, tegs=tegs, authors=current_user.id, description=description, date=datetime.date.today(), data_add_alb=datetime.date.today(),  access=access, content=str(photos))
         print("asdasdasd")
         db.session.add(albm)
         print("al")
         db.session.commit()
 
     posts = Content.query.all()
-    return render_template('create_albums.html', posts=posts)
+    return render_template('create_albums.html')
 
 
 if __name__ == "__main__":
