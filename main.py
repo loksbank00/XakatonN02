@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import os
 from werkzeug.utils import secure_filename
+from transliterate import translit
 
 # папка для сохранения загруженных файлов
 
@@ -154,7 +155,11 @@ def add_file():
     if request.method == 'POST':
         # filename = request.form.get('add_f')
         file = request.files['add_f']
-        filename = secure_filename(file.filename)
+        if file.filename[1] in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя':
+            filename = translit(file.filename[:-4],'ru')+file.filename[-4:]
+        else:
+            filename = secure_filename(file.filename)
+        print(filename)
         ras1, ras = os.path.splitext(filename)
         print(ras)
         pathfile = UPLOAD_FOLDER+filename
