@@ -642,3 +642,44 @@ input#created_a:hover{
     border: 2px solid #DBE7F6;
     font-size: 20px;
 }
+.pop_up{
+    display:none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.8);
+    left:0;
+    top: 0;
+    z-index: 3;
+}
+.pop_up.active{
+    display: block;
+}
+.pop_up_photo{
+    display: flex;
+    width: 100%;
+    height:100%;
+}
+.vis_pjoto{
+    margin: auto;
+    width: 60%;
+    background-color: #f2f2f2;
+    border-radius: 50px;
+    height: 70%;
+    position: relative;
+
+}
+.pop_up_close{
+background-image: url('../img/close.png');
+background-size: cover;
+height: 50px;
+width: 50px;
+position: absolute;
+top:-25px;
+right: -35px;
+cursor: pointer;
+}
+#pop_up_img{
+    max-width: 90%;
+    max-height: 90%;
+}

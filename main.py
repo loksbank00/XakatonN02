@@ -181,7 +181,7 @@ def red01():
 
 @app.route("/create_albums",   methods=['GET','POST'])
 def create_albums():
-
+    posts = Content.query.filter_by(author_id=current_user.id)
     if request.method == 'POST':
         print("sdfgkj")
 
@@ -207,8 +207,8 @@ def create_albums():
         print("al")
         db.session.commit()
 
-    posts = Content.query.all()
-    return render_template('create_albums.html')
+
+    return render_template('create_albums.html', posts=posts)
 
 
 if __name__ == "__main__":

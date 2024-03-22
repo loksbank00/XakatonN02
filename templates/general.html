@@ -32,11 +32,13 @@
 
       <div class="skrol_index">
         {% for post in posts %}
-          <div class="albums">
-
-            <img src="{{ post.url }}" class="img"/>
-
-          </div>
+    <div class="albums">
+      {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
+      <img src="{{ post.url }}" class="img"/>
+      {% elif post.ext in [".mp4", ".mov", ".avi"] %}
+      <video src="{{ post.url }}" class="img" controls></video>
+      {% endif %}
+    </div>
     {% else %}
     <p class="no_work">
       Пока нет работ выбранного года
@@ -45,6 +47,15 @@
     {% endfor %}
       </div>
     </div>
-
+  <div class="pop_up">
+      <div class="pop_up_photo">
+          <div class="vis_pjoto">
+              <p>sjfnsl</p>
+              <img src="" id="pop_up_img" alt="картинка">
+              <div class="pop_up_close" ></div>
+          </div>
+      </div>
+  </div>
+  <script src="../static/js/pop_up.js"></script>
   </body>
 </html>
