@@ -36,15 +36,14 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(32), nullable=False, default=False)
     admin = db.Column(db.Boolean(), nullable=False, default=False)
     avatar = db.Column(db.String(400), default="")
-    albums = db.relationship("Albums", backref="users")
-    content = db.relationship("Content", backref="users")
+
 
 class Content(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(400))
     ext = db.Column(db.String(5))
-    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    album = db.Column(db.Integer, db.ForeignKey("albums.id"))
+    author_id = db.Column(db.ForeignKey("users.id"))
+    album = db.Column( db.ForeignKey("albums.id"))
     location = db.Column(db.String(50))
     date = db.Column(db.Date)
     device = db.Column(db.String(50))
@@ -52,12 +51,15 @@ class Content(db.Model):
 
 class Albums(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    authors = db.Column(db.Integer, db.ForeignKey("users.id"))
-    description = db.Column(db.Integer)
+    name = db.Column(db.String(50), default="")
+    authors = db.Column( db.ForeignKey("users.id"))
+    description = db.Column(db.String(500))
     tegs = db.Column(db.String(50), default="")
     date = db.Column(db.Date, default="")
     data_add_alb = db.Column(db.Date, default="")
-    album = db.relationship("Content", backref="albums")
+    access = db.Column(db.Integer, default="0")
+    content = db.Column(db.String(100), default="")
+
 
 db.create_all()
 
@@ -73,7 +75,6 @@ def general():
 
 @app.route("/profile")
 def profile():
-
     posts = Content.query.filter_by(author_id=current_user.id)
     return render_template('profile.html', posts=posts)
 
@@ -164,7 +165,7 @@ def add_file():
         print(ras)
         pathfile = UPLOAD_FOLDER+filename
         print(pathfile)
-        content = Content(url=pathfile, ext=ras, author_id = current_user.id, album=1, location="", date=datetime.date.today(), device="efe")
+        content = Content(url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
         db.session.add(content)
         db.session.commit()
         print(file)
@@ -177,8 +178,33 @@ def add_file():
 def red01():
     return render_template('redact.html')
 
-@app.route("/create_albums")
+@app.route("/create_albums",   methods=['GET','POST'])
 def create_albums():
+
+    if request.method == 'POST':
+        print("sdfgkj")
+        authors = request.form.get('authors')
+        photos = request.form.get('photo_list').split(' ')
+        for i in range(len(photos)):
+            if photos[i] =='':
+                photos.remove(photos[i])
+            else:
+                photos[i]=int(photos[i])
+        print(photos)
+        name = request.form.get('name')
+        print(type(name))
+        tegs = request.form.get('tegs')
+        description = request.form.get('description')
+        access = int(request.form.get('access'))
+        print(type(access))
+        print(current_user)
+        contentinalbum =1
+        albm = Albums(name=name, tegs=tegs, authors=current_user.id, description=description, date=datetime.date.today(), data_add_alb=datetime.date.today(),  access=access)
+        print("asdasdasd")
+        db.session.add(albm)
+        print("al")
+        db.session.commit()
+
     posts = Content.query.all()
     return render_template('create_albums.html', posts=posts)
 
