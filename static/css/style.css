@@ -279,6 +279,23 @@ input[type="text"] {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(169, 183, 198, 0.5); /* Параметры тени */
 }
+input[type="password"] {
+  border: 2px solid #fff;
+  width: 55%;
+  height: 35%;
+  font-family: "FiraSans-Regular";
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  padding-left: 10px;
+  height: 35px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(169, 183, 198, 0.5); /* Параметры тени */
+}
+input[type="password"]::placeholder {
+  color: #000;
+}
 input[type="text"]::placeholder {
   color: #000;
 }
