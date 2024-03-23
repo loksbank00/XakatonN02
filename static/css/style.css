@@ -695,16 +695,17 @@ input#created_a:hover{
 
 }
 .pop_up_close{
-background-image: url('../img/close.png');
-background-size: cover;
-height: 50px;
-width: 50px;
-position: absolute;
-top:-25px;
-right: -35px;
-cursor: pointer;
-
+  background-image: url('../img/close.png');
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top:-25px;
+  right: -35px;
+  cursor: pointer;
 }
-
+.vivod_teg{
+  disabled
+}
 
 
