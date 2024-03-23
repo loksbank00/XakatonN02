@@ -24,23 +24,18 @@
     <div class="under">
       <div class="left_iararh">
 
-    <div class="ierarh">
-             {% for pos in alb %}
+<div class="ierarh">
+         {% for pos in alb %}
 
 
-            <span class="albom_item"><a href="/album/{{pos.id}}">{{pos.name}}</a></span>
+        <span>{{pos.name}}</span>
 
-             {% else %}
-                <span class="albom_item">Пока альбомов нет</span>
+         {% else %}
+            <span>Пока альбомов нет</span>
 
-             {% endfor %}
+         {% endfor %}
+ </div>
 
-     </div>
-        <a href="/create_albums">
-            <div class="button_login">
-                <h4>Новый альбом</h4>
-            </div>
-        </a>
 
 
       </div>
@@ -48,12 +43,10 @@
 
      {% for post in posts %}
     <div class="albums">
-
-      {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
-
-      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" />
-      {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img" >{{ post.autor_login }}</video>
+      {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
+      <img src="{{ post.url }}" class="img" />
+      {% elif post.ext in [".mp4", ".mov", ".avi"] %}
+      <video src="{{ post.url }}" class="img" ></video>
       {% endif %}
     </div>
     {% else %}
@@ -71,27 +64,12 @@
   <div class="pop_up">
       <div class="pop_up_photo">
           <div class="vis_pjoto">
-             <div class="otstyp_pop_up">
-               <div class="viiiis_photo">
+              <div class="button_red">
 
-               <!-- <img src="" id="pop_up_img" alt="картинка"> -->
-
-               </div>
-                 <div class="pop_up_close" ></div>
-               <div class="direct_photo">
-                 <p id="f">sr</p>
-                 <textarea id="teg_area" class="vivod_teg" disabled> </textarea>
-                 <div class="but_in_alb">
-                     <input type="hidden" class="flaf_for_remove" value="">
-                   <a class='butt' href="/" id="edit_photo"><div class="button_login"><h4>редактировать</h4></div></a>
-                   <a class='butt' href="/" id="remode_photo"><div class="button_login"><h4>удалить</h4></div></a>
-                   <a class='butt' href="/" id=" download_photo"><div class="button_login"><h4>скачать</h4></div></a>
               </div>
-
-               </div>
-
-
-             </div>
+              <p>sjfnsl</p>
+              <img src="" id="pop_up_img" alt="картинка">
+              <div class="pop_up_close" ></div>
           </div>
       </div>
   </div>
