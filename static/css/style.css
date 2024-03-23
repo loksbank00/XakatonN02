@@ -117,8 +117,8 @@ a::visited {
   margin-top: 10vh;
   background: #93D6DF;
   display: flex;
-  justify-content: center;
   justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
   position: fixed;
   top:0px;
@@ -636,11 +636,13 @@ input#created_a:hover{
 }
 .ierarh{
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding-left: 15%;
     border: 2px solid #DBE7F6;
     font-size: 20px;
+    width:85%;
 }
 .pop_up{
     display:none;
@@ -706,5 +708,21 @@ cursor: pointer;
 
 }
 
+a{
+    text-decoration: none;
+    margin-left: 20px;
+}
+.albom_item{
+width: 100%;
+}
+.albom_item:hover{
+    cursor: pointer;
+    background-color: #fff;
+}
+.back{
+    positon: absolute;
+    top: -50px;
+    right: -100px;
+}
 
 

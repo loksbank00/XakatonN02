@@ -7,6 +7,7 @@ import datetime
 import os
 from werkzeug.utils import secure_filename
 from transliterate import translit
+import ast
 
 # папка для сохранения загруженных файлов
 
@@ -213,6 +214,18 @@ def create_albums():
 
     return render_template('create_albums.html', posts=posts)
 
+@app.route('/album/<int:id>')
+def show_album(id):
+    alb = Albums.query.filter_by(authors=current_user.id)
+    posts = Content.query.filter_by(author_id=current_user.id)
+    curr_alb = Albums.query.filter_by(id=id)
+    curr_photos = []
+    y=ast.literal_eval(curr_alb[0].content)
+    for i in y:
+        curr_photos.append(Content.query.get(i))
+    return render_template('album.html', curr_alb=curr_alb, alb=alb, posts=posts, curr_photos=curr_photos)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+p

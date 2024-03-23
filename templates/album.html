@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">    <title>albums</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="top">
+      <a href="/profile"><div class="logo">
+        В профиль
+      </div></a>
+
+
+
+      <div class="buttons">
+
+          <a class='button_a' href="/"><div class="button_login"><h4>На главную</h4></div></a>
+          <a class='button_a' href="/out_akk"><div class="button_login"><h4>Выход</h4></div></a>
+
+      </div>
+    </div>
+
+    <div class="under">
+      <div class="left_iararh">
+
+    <div class="ierarh">
+             {% for pos in alb %}
+
+
+            <span class="albom_item"><a href="/album/{{pos.id}}">{{pos.name}}</a></span>
+
+             {% else %}
+                <span class="albom_item">Пока альбомов нет</span>
+
+             {% endfor %}
+
+     </div>
+        <a href="/create_albums">
+            <div class="button_login">
+                <h4>Новый альбом</h4>
+            </div>
+        </a>
+
+
+      </div>
+      <div class="skrol">
+
+         {% for post in curr_photos %}
+
+    <div class="albums">
+      {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
+      <img src="{{ '../'+post.url }}"   name="{{ post.autor_login}}" class="img"/>
+      {% elif post.ext in [".mp4", ".mov", ".avi"] %}
+      <video src="{{ '../'+post.url }}" name="{{ post.autor_login}}" class="img" controls></video>
+      {% endif %}
+    </div>
+    {% else %}
+    <p class="no_work">
+      Пока нет работ выбранного года
+    </p>
+
+    {% endfor %}
+
+      </div>
+
+      </div>
+    </div>
+    <div class="button_add_file"><a class="button_a" href="/af"> <div class="a_add">+</div> </a></div>
+
+  <div class="pop_up">
+      <div class="pop_up_photo">
+          <div class="vis_pjoto">
+              <div class="button_red">
+
+              </div>
+              <p>sjfnsl</p>
+              <img src="" id="pop_up_img" alt="картинка">
+              <div class="pop_up_close" ></div>
+          </div>
+      </div>
+  </div>
+    <script src="../static/js/pop_up.js"></script>
+  </body>
+</html>
