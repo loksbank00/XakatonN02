@@ -665,8 +665,33 @@ input#created_a:hover{
     width: 60%;
     background-color: #f2f2f2;
     border-radius: 50px;
-    height: 70%;
+    height: 80%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.otstyp_pop_up{
+  height: 95%;
+  width: 95%;
+  display: flex;
+
+}
+.viiiis_photo{
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+#pop_up_img{
+  max-height: 95%;
+  max-width: 95%;
+}
+.direct_photo{
 
 }
 .pop_up_close{
@@ -678,8 +703,8 @@ position: absolute;
 top:-25px;
 right: -35px;
 cursor: pointer;
+
 }
-#pop_up_img{
-    max-width: 90%;
-    max-height: 90%;
-}
+
+
+

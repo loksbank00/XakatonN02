@@ -24,16 +24,17 @@
     <div class="under">
       <div class="left_iararh">
 
+<div class="ierarh">
+         {% for pos in alb %}
 
-         {% for post in alb %}
 
-             <div class="ierarh">
-               <span>{{post.name}}</span>
-             </div>
+        <span>{{pos.name}}</span>
 
-          {% else %}
+         {% else %}
+            <span>Пока альбомов нет</span>
+
          {% endfor %}
-
+ </div>
 
 
 
@@ -63,6 +64,9 @@
   <div class="pop_up">
       <div class="pop_up_photo">
           <div class="vis_pjoto">
+              <div class="button_red">
+
+              </div>
               <p>sjfnsl</p>
               <img src="" id="pop_up_img" alt="картинка">
               <div class="pop_up_close" ></div>

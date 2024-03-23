@@ -43,6 +43,7 @@ class Content(db.Model):
     url = db.Column(db.String(400))
     ext = db.Column(db.String(5))
     author_id = db.Column(db.ForeignKey("users.id"))
+    autor_login = db.Column(db.String(50))
     album = db.Column(db.ForeignKey("albums.id"))
     location = db.Column(db.String(50))
     date = db.Column(db.Date)
@@ -71,6 +72,7 @@ def load_user(user_id):
 @app.route("/general")
 def general():
     posts = Content.query.all()
+
     return render_template('general.html',posts=posts)
 
 @app.route("/profile")
@@ -166,7 +168,8 @@ def add_file():
         print(ras)
         pathfile = UPLOAD_FOLDER+filename
         print(pathfile)
-        content = Content(url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
+        autor_login = Users.query.filter_by(id=current_user.id).first()
+        content = Content(autor_login=autor_login.login , url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
         db.session.add(content)
         db.session.commit()
         print(file)
