@@ -123,6 +123,7 @@ function changeColor(e) {
       var sender = (e && e.target) || (window.event && window.event.srcElement);
       if (sender.name == 'but1'){
         submits[0].value='0';
+
         document.getElementById('cat0').style.backgroundColor = '#DBE7F6';
         document.getElementById('cat1').style.backgroundColor = '';
         console.log(submits['0']);

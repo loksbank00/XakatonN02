@@ -16,19 +16,20 @@
                 <form method="post" style="height: 100%">
                     <div class="da">
 
-                        <textarea name="authors" class="input_album" id="authors"></textarea>
-                        <textarea name="name" class="input_album" id="name"></textarea>
-                        <textarea name="tegs" class="input_album" id="tegs"></textarea>
-                        <textarea name="description" class="input_album" id="description"></textarea>
+                        <textarea name="authors" class="input_album" id="authors" placeholder="authors" >{{current_user.login}}</textarea>
+                        <textarea name="name" class="input_album" id="name" placeholder="name"></textarea>
+                        <textarea name="tegs" class="input_album" id="tegs" placeholder="tegs"></textarea>
+                        <textarea name="description" class="input_album" id="description" placeholder="description"></textarea>
                     </div>
                     <div class="access_b">
                         <input type="hidden" name="access" value="0">
-                        <input class="access" id="cat0" type="button" name="but1" value="0" onclick='changeColor()'>
-                        <input class="access" id="cat1" type="button" name="but" value="1" onclick='changeColor()'>
+                        <input class="access" id="cat0" type="button" name="but1" value="Открытый" onclick='changeColor()'>
+                        <input class="access" id="cat1" type="button" name="but" value="Закрытый" onclick='changeColor()'>
                     </div>
 
                     <div class="divcreatedalbum">
                         <input type="submit" value="Создать" id="created_a">
+
                     </div>
                     <input type="hidden" name="photo_list" value="">
                 </form>
@@ -75,10 +76,7 @@
        </div>
 
    </div>
-    <div class="back">
-      <a href="/profile"><div class="logo">
-        В профиль
-      </div></a>
+
   <script src="../static/js/script1.js">
 
     </script>

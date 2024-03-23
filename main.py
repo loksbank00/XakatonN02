@@ -7,7 +7,6 @@ import datetime
 import os
 from werkzeug.utils import secure_filename
 from transliterate import translit
-import ast
 
 # папка для сохранения загруженных файлов
 
@@ -49,6 +48,7 @@ class Content(db.Model):
     location = db.Column(db.String(50))
     date = db.Column(db.Date)
     device = db.Column(db.String(50))
+    tegs = db.Column(db.String(150), default="")
 
 
 class Albums(db.Model):
@@ -56,7 +56,7 @@ class Albums(db.Model):
     name = db.Column(db.String(50), default="")
     authors = db.Column( db.ForeignKey("users.id"))
     description = db.Column(db.String(500))
-    tegs = db.Column(db.String(50), default="")
+    tegs = db.Column(db.String(150), default="")
     date = db.Column(db.Date, default="")
     data_add_alb = db.Column(db.Date, default="")
     access = db.Column(db.Integer, default="0")
@@ -170,7 +170,8 @@ def add_file():
         pathfile = UPLOAD_FOLDER+filename
         print(pathfile)
         autor_login = Users.query.filter_by(id=current_user.id).first()
-        content = Content(autor_login=autor_login.login , url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
+        tegs = request.form.get('tegs_a')
+        content = Content(tegs=tegs, autor_login=autor_login.login , url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
         db.session.add(content)
         db.session.commit()
         print(file)
@@ -210,22 +211,23 @@ def create_albums():
         db.session.add(albm)
         print("al")
         db.session.commit()
+        return redirect(url_for('profile'))
+
 
 
     return render_template('create_albums.html', posts=posts)
 
-@app.route('/album/<int:id>')
-def show_album(id):
-    alb = Albums.query.filter_by(authors=current_user.id)
-    posts = Content.query.filter_by(author_id=current_user.id)
-    curr_alb = Albums.query.filter_by(id=id)
-    curr_photos = []
-    y=ast.literal_eval(curr_alb[0].content)
-    for i in y:
-        curr_photos.append(Content.query.get(i))
-    return render_template('album.html', curr_alb=curr_alb, alb=alb, posts=posts, curr_photos=curr_photos)
-
+@app.route('/photo/<string:autor_login>/del')
+def remove_photo(autor_login):
+    print(autor_login)
+    photo = Content.query.filter_by(autor_login=autor_login)
+    print(photo)
+    try:
+        db.session.delete(photo[0])
+        db.session.commit()
+        return redirect('/profile')
+    except:
+        return "При удалении произошла ошибка"
 
 if __name__ == "__main__":
     app.run(debug=True)
-p
