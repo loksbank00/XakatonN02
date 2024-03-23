@@ -10,10 +10,7 @@
       <div class="logo">
 
       </div>
-      <div class="search_area">
-        <input class="search" type="text" name="" value="">
-        <button class="search_button" type="button" name="button"><h5>Поиск</h5></button>
-      </div>
+
       {% if current_user.is_authenticated %}
       <div class="buttons">
 
@@ -34,9 +31,9 @@
         {% for post in posts %}
     <div class="albums">
       {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
-      <img src="{{ post.url }}"   name="{{ post.autor_login}}" class="img"/>
+      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img"/>
       {% elif post.ext in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" name="{{ post.autor_login}}" class="img" controls></video>
+      <video src="{{ post.url }}" title="{{ post.tegs }}" name="{{ post.autor_login }}" class="img" controls></video>
       {% endif %}
     </div>
     {% else %}
@@ -58,7 +55,7 @@
                </div>
                <div class="direct_photo">
                  <p id="f">sr</p>
-                 <textarea class="vivod_teg"></textarea>
+                 <textarea id="teg_area" class="vivod_teg" disabled> </textarea>
                  <div class="but_in_alb">
                    <a class='butt' href="/"><div class="button_login"><h4>редактировать</h4></div></a>
                    <a class='butt' href="/"><div class="button_login"><h4>удалить</h4></div></a>

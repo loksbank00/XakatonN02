@@ -48,6 +48,7 @@ class Content(db.Model):
     location = db.Column(db.String(50))
     date = db.Column(db.Date)
     device = db.Column(db.String(50))
+    tegs = db.Column(db.String(150), default="")
 
 
 class Albums(db.Model):
@@ -55,7 +56,7 @@ class Albums(db.Model):
     name = db.Column(db.String(50), default="")
     authors = db.Column( db.ForeignKey("users.id"))
     description = db.Column(db.String(500))
-    tegs = db.Column(db.String(50), default="")
+    tegs = db.Column(db.String(150), default="")
     date = db.Column(db.Date, default="")
     data_add_alb = db.Column(db.Date, default="")
     access = db.Column(db.Integer, default="0")
@@ -169,7 +170,8 @@ def add_file():
         pathfile = UPLOAD_FOLDER+filename
         print(pathfile)
         autor_login = Users.query.filter_by(id=current_user.id).first()
-        content = Content(autor_login=autor_login.login , url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
+        tegs = request.form.get('tegs_a')
+        content = Content(tegs=tegs, autor_login=autor_login.login , url=pathfile, ext=ras, author_id = current_user.id, album=0, location="", date=datetime.date.today(), device="efe")
         db.session.add(content)
         db.session.commit()
         print(file)

@@ -3,6 +3,8 @@ const openPopUp = document.getElementsByClassName("img");
         const popUp = document.getElementsByClassName("pop_up");
         const popUpImg = document.getElementById('pop_up_img');
         const rd = document.getElementById("f");
+        const teg = document.getElementById("teg_area");
+
         console.log(rd)
 
         for (var index = 0; index < openPopUp.length; index++) {
@@ -11,7 +13,10 @@ const openPopUp = document.getElementsByClassName("img");
                 popUpImg.src = this.src;
                 document.body.style.overflow = 'hidden';
                 console.log(rd.innerHTML)
-                rd.innerHTML=this.name;
+                rd.innerHTML = this.name;
+                teg.innerHTML = this.title;
+
+
         });}
         closePopUp[0].addEventListener('click', function(e){
             popUp[0].classList.remove('active');

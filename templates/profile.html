@@ -24,17 +24,18 @@
     <div class="under">
       <div class="left_iararh">
 
-<div class="ierarh">
+
          {% for pos in alb %}
+            <div class="ierarh">
 
 
-        <span>{{pos.name}}</span>
-
+            <span>{{pos.name}}</span>
+             </div>
          {% else %}
             <span>Пока альбомов нет</span>
 
          {% endfor %}
- </div>
+
 
 
 
@@ -46,7 +47,7 @@
       {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
       <img src="{{ post.url }}" class="img" />
       {% elif post.ext in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" class="img" ></video>
+      <video src="{{ post.url }}" class="img" controls></video>
       {% endif %}
     </div>
     {% else %}
