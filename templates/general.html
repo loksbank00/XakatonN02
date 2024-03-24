@@ -10,13 +10,10 @@
       <div class="logo">
 
       </div>
-      <div class="search_area">
-        <input class="search" type="text" name="" value="">
-        <button class="search_button" type="button" name="button"><h5>Поиск</h5></button>
-      </div>
+
       {% if current_user.is_authenticated %}
       <div class="buttons">
-
+          <h2 class="prof_g">{{current_user.last_name}} {{current_user.first_name}}</h2>
           <a class='button_a' href="/profile"><div class="button_login"><h4>Профиль</h4></div></a>
 
       </div>
@@ -34,15 +31,15 @@
         {% for post in posts %}
     <div class="albums">
 
-      {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
+      {% if post.ext.lower() in [".png", ".jpg", ".jpeg", ".webp"]  %}
       <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`"/>
       {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
+      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img" loop muted autoplay="autoplay"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
       {% endif %}
     </div>
     {% else %}
     <p class="no_work">
-      Пока нет работ выбранного года
+      На сайте еще нет изображений
     </p>
 
     {% endfor %}

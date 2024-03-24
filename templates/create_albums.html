@@ -16,10 +16,10 @@
                 <form method="post" style="height: 100%">
                     <div class="da">
 
-                        <textarea name="authors" class="input_album" id="authors" placeholder="authors" >{{current_user.login}}</textarea>
-                        <textarea name="name" class="input_album" id="name" placeholder="name"></textarea>
-                        <textarea name="tegs" class="input_album" id="tegs" placeholder="tegs"></textarea>
-                        <textarea name="description" class="input_album" id="description" placeholder="description"></textarea>
+                        <textarea name="authors" class="input_album" id="authors" placeholder="Авторы" >{{current_user.login}}</textarea>
+                        <textarea name="name" class="input_album" id="name" placeholder="Название"></textarea>
+                        <textarea name="tegs" class="input_album" id="tegs" placeholder="Теги"></textarea>
+                        <textarea name="description" class="input_album" id="description" placeholder="Описание"></textarea>
                     </div>
                     <div class="access_b">
                         <input type="hidden" name="access" value="0">
@@ -33,13 +33,14 @@
                     </div>
                     <input type="hidden" name="photo_list" value="">
                 </form>
+
            </div>
            <div class="right">
                      <div class="skrol_in_form">
 
                         {% for post in posts %}
 
-                         {% if post.ext in [".png", ".jpg", ".jpeg"] and post.album==0 %}
+                         {% if post.ext in [".png", ".jpg", ".jpeg", ".webp"] and post.album==0 %}
 
 
                          <div class="albums">
@@ -56,7 +57,7 @@
                          <div class="albums">
                                 <input type="checkbox" name="photo" id="{{ post.id }}" value="{{ post.id }}"/>
                                 <label for="{{ post.id }}"></label>
-                                 <video class="img" src="{{ post.url }}" controls></video>
+                                 <video class="img" autoplay="autoplay" muted src="{{ post.url }}" controls></video>
                                 <div class="galka">
 
                                 </div>
@@ -65,7 +66,7 @@
                             {% endif %}
                         {% else %}
                             <p class="no_work">
-                                Пока нет работ выбранного года
+                                Вы еще не добавили фотографии для создания альбома
                             </p>
 
                     {% endfor %}
@@ -76,10 +77,7 @@
        </div>
 
    </div>
-    <div class="back">
-      <a href="/profile"><div class="logo">
-        В профиль
-      </div></a>
+
   <script src="../static/js/script1.js">
 
     </script>

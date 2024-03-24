@@ -14,9 +14,9 @@
 
 
       <div class="buttons">
-            <h1 class="prof">Профиль</h1>
+            <h1 class="prof">{{current_user.last_name}} {{current_user.first_name}}</h1>
           <a class='button_a' href="/"><div class="button_login"><h4>На главную</h4></div></a>
-          <a class='button_a' href="/out_akk"><div class="button_login"><h4>Выход</h4></div></a>
+          <a class='button_a' href="/out_akk"><div id="new_album" class="button_login"><h4>Выход</h4></div></a>
 
       </div>
     </div>
@@ -30,16 +30,16 @@
      {% for post in posts %}
     <div class="albums">
 
-      {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
+      {% if post.ext.lower() in [".png", ".jpg", ".jpeg", ".webp"]  %}
 
       <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo',id=post.id)}}`"/>
       {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img" onclick="location.href=`{{url_for('view_photo',id=post.id)}}`">{{ post.autor_login }}</video>
+      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img" loop muted autoplay="autoplay" controls onclick="location.href=`{{url_for('view_photo',id=post.id)}}`">{{ post.autor_login }}</video>
       {% endif %}
     </div>
     {% else %}
     <p class="no_work">
-      Пока нет работ выбранного года
+      Вы еще не добавили изображения
     </p>
 
     {% endfor %}

@@ -11,8 +11,7 @@
 
       </div>
       <div class="search_area">
-        <input class="search" type="text" name="" value="">
-        <button class="search_button" type="button" name="button"><h5>Поиск</h5></button>
+
       </div>
       {% if current_user.is_authenticated %}
       <div class="buttons">
@@ -34,10 +33,10 @@
         {% for post in posts %}
     <div class="albums">
 
-      {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
-      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`"/>
+      {% if post.ext.lower() in [".png", ".jpg", ".jpeg", ".webp"]  %}
+      <img src="{{ '../'+post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`"/>
       {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
+      <video src="{{ '../'+post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
       {% endif %}
     </div>
     {% else %}
@@ -56,10 +55,10 @@
 
 
 
-               {% if curr_photo.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
+               {% if curr_photo.ext.lower() in [".png", ".jpg", ".jpeg", ".webp"]  %}
                 <img src="{{'../'+curr_photo.url}}" id="pop_up_img" alt="картинка">
                    {% elif curr_photo.ext.lower() in [".mp4", ".mov", ".avi"] %}
-                   <video src="{{'../'+curr_photo.url}}" id="pop_up_img" alt="картинка" controls autoplay></video>
+                   <video src="{{'../'+curr_photo.url}}" id="pop_up_img" muted alt="картинка" controls autoplay></video>
                    {% endif %}
 
                </div>
@@ -69,7 +68,8 @@
                  <p id="f">Автор: {{curr_photo.autor_login}}</p>
                    <p>Теги</p>
                  <textarea id="teg_area" class="vivod_teg" disabled>{{curr_photo.tegs}} </textarea>
-                 <div class="but_in_alb">
+                 {% if current_user.is_authenticated and current_user.id == curr_photo.author_id %}
+                   <div class="but_in_alb">
                      <input type="hidden" class="flaf_for_remove" value="">
                    {% if curr_photo.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
                      <a class='butt' onclick="location.href=`{{url_for('red01', id=curr_photo.id)}}`" id="edit_photo"><div class="button_login"><h4>редактировать</h4></div></a>
@@ -79,6 +79,7 @@
                      {% set  filename = curr_photo.url[curr_photo.url.rfind('/'):] %}
                      <a class='butt' onclick="location.href=`{{url_for('download', url=filename)}}`" id=" download_photo"><div class="button_login"><h4>скачать</h4></div></a>
               </div>
+                 {% endif %}
 
                </div>
 
