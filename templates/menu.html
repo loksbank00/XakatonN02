@@ -1,0 +1,22 @@
+ <div class="left_iararh">
+
+    <div class="ierarh">
+             {% for pos in alb %}
+
+
+            <span class="albom_item"><a href="/album/{{pos.id}}">{{pos.name}}</a></span>
+
+             {% else %}
+                <span class="albom_item">Пока альбомов нет</span>
+
+             {% endfor %}
+
+     </div>
+        <a href="/create_albums">
+            <div class="button_login">
+                <h4>Новый альбом</h4>
+            </div>
+        </a>
+
+
+      </div>

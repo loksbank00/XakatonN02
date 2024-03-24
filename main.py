@@ -7,6 +7,7 @@ import datetime
 import os
 from werkzeug.utils import secure_filename
 from transliterate import translit
+import ast
 
 # папка для сохранения загруженных файлов
 
@@ -195,6 +196,7 @@ def create_albums():
         for i in range(len(photos)):
             if photos[i] =='':
                 photos.remove(photos[i])
+
             else:
                 photos[i]=int(photos[i])
         print(photos)
@@ -207,9 +209,15 @@ def create_albums():
         print(current_user)
         contentinalbum =1
         albm = Albums(name=name, tegs=tegs, authors=current_user.id, description=description, date=datetime.date.today(), data_add_alb=datetime.date.today(),  access=access, content=str(photos))
+
         print("asdasdasd")
         db.session.add(albm)
         print("al")
+        db.session.commit()
+        for i in photos:
+            print('id albumr',albm.id)
+            print('cont',Content.query.get(i).album)
+            Content.query.get(i).album = albm.id
         db.session.commit()
         return redirect(url_for('profile'))
 
@@ -217,17 +225,51 @@ def create_albums():
 
     return render_template('create_albums.html', posts=posts)
 
-@app.route('/photo/<string:autor_login>/del')
-def remove_photo(autor_login):
-    print(autor_login)
-    photo = Content.query.filter_by(autor_login=autor_login)
-    print(photo)
+@app.route('/album/<int:id>')
+def show_album(id):
+    alb = Albums.query.filter_by(authors=current_user.id)
+    posts = Content.query.filter_by(author_id=current_user.id)
+    curr_alb = Albums.query.get(id)
+    curr_photos = []
+    y=ast.literal_eval(curr_alb.content)
+    for i in y:
+        curr_photos.append(Content.query.get(i))
+    return render_template('album.html', curr_alb=curr_alb, alb=alb, posts=posts, curr_photos=curr_photos)
+
+
+
+@app.route('/photo/<int:id>/del')
+def remove_photo(id):
+    print(type(id))
+    print(db.session.get(Content, id).album)
+    alb = db.session.get(Albums,db.session.get(Content,id).album)
+
+    photo = Content.query.get_or_404(id)
+
     try:
-        db.session.delete(photo[0])
+        if photo.album != 0:
+            cont_alb = ast.literal_eval(alb.content)
+            for i in cont_alb:
+                if i ==id:
+                    print('id photo',i, type(i))
+                    cont_alb.remove(i)
+                    print(cont_alb)
+                    o = db.session.get(Albums,db.session.get(Content,i).album)
+                    o.content = str(cont_alb)
+                    print(o, o.content)
+                    break
+        db.session.delete(photo)
         db.session.commit()
         return redirect('/profile')
     except:
         return "При удалении произошла ошибка"
+
+@app.route('/profile/<int:id>')
+def view_photo(id):
+    alb = Albums.query.filter_by(authors=current_user.id)
+    posts = Content.query.filter_by(author_id=current_user.id)
+    curr_photo = Content.query.get(id)
+    return render_template('view_photo.html', alb=alb, posts=posts, curr_photo=curr_photo)
 
 if __name__ == "__main__":
     app.run(debug=True)

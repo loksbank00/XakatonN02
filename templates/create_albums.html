@@ -39,7 +39,7 @@
 
                         {% for post in posts %}
 
-                         {% if post.ext in [".png", ".jpg", ".jpeg"]  %}
+                         {% if post.ext in [".png", ".jpg", ".jpeg"] and post.album==0 %}
 
 
                          <div class="albums">
@@ -50,7 +50,7 @@
 
                                 </div>
                             </div>
-                            {% elif post.ext == ".mp4" %}
+                            {% elif post.ext == ".mp4" and post.album==0 %}
 
 
                          <div class="albums">
@@ -76,7 +76,10 @@
        </div>
 
    </div>
-
+    <div class="back">
+      <a href="/profile"><div class="logo">
+        В профиль
+      </div></a>
   <script src="../static/js/script1.js">
 
     </script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">    <title>albums</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="top">
+      <a href="index1.2.html"><div class="logo">
+
+      </div></a>
+
+
+
+      <div class="buttons">
+
+          <a class='button_a' href="/"><div class="button_login"><h4>На главную</h4></div></a>
+          <a class='button_a' href="/out_akk"><div class="button_login"><h4>Выход</h4></div></a>
+
+      </div>
+    </div>
+
+    <div class="under">
+      <div class="left_iararh">
+
+    <div class="ierarh">
+             {% for pos in alb %}
+
+
+            <span class="albom_item"><a href="/album/{{pos.id}}">{{pos.name}}</a></span>
+
+             {% else %}
+                <span class="albom_item">Пока альбомов нет</span>
+
+             {% endfor %}
+
+     </div>
+        <a href="/create_albums">
+            <div class="button_login">
+                <h4>Новый альбом</h4>
+            </div>
+        </a>
+
+
+      </div>
+      <div class="skrol">
+
+     {% for post in posts %}
+    <div class="albums">
+
+      {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
+
+      <img src="{{ '../'+post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" />
+      {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
+      <video src="{{ '../'+post.url }}" title="{{ post.tegs }}"  class="img" >{{ post.autor_login }}</video>
+      {% endif %}
+    </div>
+    {% else %}
+    <p class="no_work">
+      Пока нет работ выбранного года
+    </p>
+
+    {% endfor %}
+  </div>
+
+      </div>
+    </div>
+    <div class="button_add_file"><a class="button_a" href="/af"> <div class="a_add">+</div> </a></div>
+
+  <div class="pop_up active">
+      <div class="pop_up_photo">
+          <div class="vis_pjoto">
+             <div class="otstyp_pop_up">
+               <div class="viiiis_photo">
+
+
+
+               {% if curr_photo.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
+                <img src="{{'../'+curr_photo.url}}" id="pop_up_img" alt="картинка">
+                   {% elif curr_photo.ext.lower() in [".mp4", ".mov", ".avi"] %}
+                   <video src="{{'../'+curr_photo.url}}" id="pop_up_img" alt="картинка" controls autoplay></video>
+                   {% endif %}
+
+               </div>
+                 <div class="pop_up_close" onclick="location.href=`{{url_for('profile')}}`"></div>
+               <div class="direct_photo">
+                 <p id="f">{{curr_photo.autor_login}}</p>
+                 <textarea id="teg_area" class="vivod_teg" disabled>{{curr_photo.tegs}} </textarea>
+                 <div class="but_in_alb">
+                     <input type="hidden" class="flaf_for_remove" value="">
+                   <a class='butt' href="/" id="edit_photo"><div class="button_login"><h4>редактировать</h4></div></a>
+                   <a class='butt' onclick="location.href=`{{url_for('remove_photo', id=curr_photo.id)}}`" id="remode_photo"><div class="button_login"><h4>удалить</h4></div></a>
+                   <a class='butt' href="/" id=" download_photo"><div class="button_login"><h4>скачать</h4></div></a>
+              </div>
+
+               </div>
+
+
+             </div>
+          </div>
+      </div>
+  </div>
+<!--    <script src="../static/js/pop_up.js"></script>-->
+  </body>
+</html>

@@ -5,7 +5,7 @@
 body{
   background: #fff8f8;
   height: 100vh;
-  width: 100vw;
+  width: 98vw;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -13,6 +13,7 @@ body{
 .button_a{
     text-decoration: none;
     color: #03545F;
+
    }
 a::visited {
     text-decoration: none;
@@ -408,6 +409,7 @@ input[type=file]::file-selector-button:hover {
    justify-content: center;
    height: 100%;
    width: 0;
+   padding-top: 15%;
 }
 
 .text{
@@ -727,4 +729,9 @@ width: 100%;
 display: flex;
 flex-direction: column;
 }
-
+.prof{
+position:absolute;
+left:230px;}
+a.butt{
+cursor:pointer;
+}
