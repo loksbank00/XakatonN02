@@ -35,9 +35,9 @@
     <div class="albums">
 
       {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
-      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo',id=post.id)}}`"/>
+      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`"/>
       {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo',id=post.id)}}`">{{ post.autor_login }}</video>
+      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
       {% endif %}
     </div>
     {% else %}
@@ -48,32 +48,6 @@
     {% endfor %}
       </div>
     </div>
-  <div class="pop_up">
-      <div class="pop_up_photo">
-          <div class="vis_pjoto">
-            <div class="otstyp_pop_up">
-               <div class="viiiis_photo">
 
-               <!-- <img src="" id="pop_up_img" alt="картинка"> -->
-
-               </div>
-                 <div class="pop_up_close" ></div>
-               <div class="direct_photo">
-                 <p id="f">sr</p>
-                 <textarea id="teg_area" class="vivod_teg" disabled> </textarea>
-                 <div class="but_in_alb">
-                   <a class='butt' href="/"><div class="button_login"><h4>редактировать</h4></div></a>
-                   <a class='butt' href="/"><div class="button_login"><h4>удалить</h4></div></a>
-                   <a class='butt' href="/"><div class="button_login"><h4>скачать</h4></div></a>
-              </div>
-
-               </div>
-
-
-             </div>
-          </div>
-      </div>
-  </div>
-  <script src="../static/js/pop_up.js"></script>
   </body>
 </html>

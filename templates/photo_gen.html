@@ -2,77 +2,57 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">    <title>albums</title>
-    <script src="script.js"></script>
+    <title>1.2</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
   </head>
   <body>
     <div class="top">
-      <a href="index1.2.html"><div class="logo">
+      <div class="logo">
 
-      </div></a>
-
-
-
+      </div>
+      <div class="search_area">
+        <input class="search" type="text" name="" value="">
+        <button class="search_button" type="button" name="button"><h5>Поиск</h5></button>
+      </div>
+      {% if current_user.is_authenticated %}
       <div class="buttons">
 
-          <a class='button_a' href="/"><div class="button_login"><h4>На главную</h4></div></a>
-          <a class='button_a' href="/out_akk"><div class="button_login"><h4>Выход</h4></div></a>
+          <a class='button_a' href="/profile"><div class="button_login"><h4>Профиль</h4></div></a>
 
       </div>
+      {% else %}
+      <div class="buttons">
+
+          <a class='button_a' href="/log"><div class="button_login"><h4>Вход</h4></div></a>
+
+      </div>
+      {% endif %}
     </div>
+    <div class="under_index">
 
-    <div class="under">
-      <div class="left_iararh">
-
-    <div class="ierarh">
-             {% for pos in alb %}
-
-
-            <span class="albom_item"><a href="/album/{{pos.id}}">{{pos.name}}</a></span>
-
-             {% else %}
-                <span class="albom_item">Пока альбомов нет</span>
-
-             {% endfor %}
-
-     </div>
-        <a href="/create_albums">
-            <div class="button_login">
-                <h4>Новый альбом</h4>
-            </div>
-        </a>
-
-
-      </div>
-      <div class="skrol">
-
-     {% for post in posts %}
+      <div class="skrol_index">
+        {% for post in posts %}
     <div class="albums">
 
       {% if post.ext.lower() in [".png", ".jpg", ".jpeg"]  %}
-
-      <img src="{{ '../'+post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" />
+      <img src="{{ post.url }}" title="{{ post.tegs }}"  name="{{ post.autor_login }}" class="img" onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`"/>
       {% elif post.ext.lower() in [".mp4", ".mov", ".avi"] %}
-      <video src="{{ '../'+post.url }}" title="{{ post.tegs }}"  class="img" >{{ post.autor_login }}</video>
+      <video src="{{ post.url }}" title="{{ post.tegs }}"  class="img"  onclick="location.href=`{{url_for('view_photo_a',id=post.id)}}`">{{ post.autor_login }}</video>
       {% endif %}
     </div>
     {% else %}
     <p class="no_work">
-      Пока нет фоток
+      Пока нет работ выбранного года
     </p>
 
     {% endfor %}
-  </div>
-
       </div>
     </div>
-    <div class="button_add_file"><a class="button_a" href="/af"> <div class="a_add">+</div> </a></div>
-
   <div class="pop_up active">
       <div class="pop_up_photo">
           <div class="vis_pjoto">
-             <div class="otstyp_pop_up">
-               <div class="viiiis_photo">
+            <div class="otstyp_pop_up">
+                <div class="viiiis_photo">
 
 
 
@@ -83,7 +63,7 @@
                    {% endif %}
 
                </div>
-                 <div class="pop_up_close" onclick="location.href=`{{url_for('profile')}}`"></div>
+                 <div class="pop_up_close" onclick="location.href=`{{url_for('general')}}`"></div>
                <div class="direct_photo">
 
                  <p id="f">Автор: {{curr_photo.autor_login}}</p>
@@ -107,6 +87,6 @@
           </div>
       </div>
   </div>
-<!--    <script src="../static/js/pop_up.js"></script>-->
+  <script src="../static/js/pop_up.js"></script>
   </body>
 </html>

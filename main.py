@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -181,9 +181,11 @@ def add_file():
 
     return render_template("add_file.html")
 
-@app.route("/red01")
-def red01():
-    return render_template('redact.html')
+@app.route("/red01/<int:id>")
+def red01(id):
+    photo = db.session.get(Content, id)
+    photo_file = open(photo.url,'rb')
+    return render_template('redact.html', photo=photo, photo_file=photo_file)
 
 @app.route("/create_albums",   methods=['GET','POST'])
 def create_albums():
@@ -270,6 +272,18 @@ def view_photo(id):
     posts = Content.query.filter_by(author_id=current_user.id)
     curr_photo = Content.query.get(id)
     return render_template('view_photo.html', alb=alb, posts=posts, curr_photo=curr_photo)
+
+@app.route('/photo/<int:id>')
+def view_photo_a(id):
+    posts = Content.query.all()
+    curr_photo = Content.query.get(id)
+    return render_template('photo_gen.html',  posts=posts, curr_photo=curr_photo)
+
+
+@app.route('/uploads/<path:url>', methods=['GET', 'POST'])
+def download(url):
+    uploads = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(uploads, url)
 
 if __name__ == "__main__":
     app.run(debug=True)
